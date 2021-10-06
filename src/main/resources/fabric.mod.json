@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "deepslateinstamine",
+  "version": "${version}",
+  "name": "Deepslate Instamine",
+  "description": "Instamine deepslate using haste 2 beacon and efficiency V netherite pickaxe",
+  "authors": [
+    "nicguzzo"
+  ],
+  "contact": {
+    "homepage": "https://github.com/nicguzzo/deepslateinstamine_fabric",
+    "sources": "https://github.com/nicguzzo/deepslateinstamine_fabric"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/deepslateinstamine/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.fabricmc.deepslateinstamine.Mod"
+    ]
+  },
+  "mixins": [
+    "deepslateinstamine.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
