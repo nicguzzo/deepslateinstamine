@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.deepslateinstamine.Mod"
+      "net.nicguzzo.deepslateinstamine.Mod"
     ]
   },
   "mixins": [

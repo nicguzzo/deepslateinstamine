@@ -1,4 +1,4 @@
-package net.fabricmc.deepslateinstamine.mixin;
+package net.nicguzzo.deepslateinstamine.mixin;
 
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
