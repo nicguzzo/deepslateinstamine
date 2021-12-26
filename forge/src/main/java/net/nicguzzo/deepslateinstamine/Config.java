@@ -7,18 +7,19 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.nicguzzo.deepslateinstamine.DeepslateInstamineMod;
 
 public class Config {
 
 	private static Config INSTANCE = null;
 	public boolean enable_renewable_deepslate = true;
 	public int renewable_deepslate_below_level = 11;
+	public boolean enable_logs_instamine = true;
 
 	public static void load_config() {
 		INSTANCE = new Config();
 		Gson gson = new Gson();
-		File configFile = new File(FMLPaths.GAMEDIR.get().resolve("config").toString(), "deepslate_instamine.json");
+		File configFile = new File(DeepslateInstamineMod.get_config_dir(), "deepslate_instamine.json");
 		try (FileReader reader = new FileReader(configFile)) {
 			INSTANCE = gson.fromJson(reader, Config.class);
 			System.out.println("Config: " + INSTANCE);

@@ -18,12 +18,12 @@ import net.nicguzzo.deepslateinstamine.DeepslateInstamineMod;
 
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin {
-
-    @Inject(at = @At("HEAD"), cancellable = true, method = "spreadTo(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/world/level/material/FluidState;)V")
+    @Inject(at = @At("HEAD"), cancellable = true, method = "spreadTo")
     private void spreadTo(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Direction direction,
             FluidState fluidState, CallbackInfo ci) {
 
-        if (DeepslateInstamineMod.CONFIG.enable_renewable_deepslate && blockPos.getY() < DeepslateInstamineMod.CONFIG.renewable_deepslate_below_level) {
+        if (DeepslateInstamineMod.CONFIG.enable_renewable_deepslate && 
+            blockPos.getY() < DeepslateInstamineMod.CONFIG.renewable_deepslate_below_level) {
             if (direction == Direction.DOWN) {
                 FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
                 if (fluidState2.is(FluidTags.WATER)) {

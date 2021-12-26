@@ -7,8 +7,6 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.fabricmc.loader.api.FabricLoader;
-
 public class Config {
 
 	private static Config INSTANCE = null;
@@ -19,7 +17,7 @@ public class Config {
 	public static void load_config() {
 		INSTANCE = new Config();
 		Gson gson = new Gson();
-		File configFile = new File(FabricLoader.getInstance().getConfigDir().toString(), "deepslate_instamine.json");
+		File configFile = new File(DeepslateInstamineMod.get_config_dir(), "deepslate_instamine.json");
 		try (FileReader reader = new FileReader(configFile)) {
 			INSTANCE = gson.fromJson(reader, Config.class);
 			System.out.println("Config: " + INSTANCE);
