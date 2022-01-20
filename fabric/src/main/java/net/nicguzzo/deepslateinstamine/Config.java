@@ -11,8 +11,8 @@ public class Config {
 
 	private static Config INSTANCE = null;
 	public boolean enable_renewable_deepslate = true;
-	public int renewable_deepslate_below_level = 11;
-	public boolean enable_logs_instamine = true;
+	public int renewable_deepslate_below_level = 16;
+	public boolean enable_logs_instamine = false;
 
 	public static void load_config() {
 		INSTANCE = new Config();
