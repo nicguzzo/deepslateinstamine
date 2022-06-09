@@ -18,7 +18,7 @@ public class DeepslateInstamineMod
 {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final Config CONFIG = Config.get_instance();
+    public static final Config config = Config.get_instance();
 
     public DeepslateInstamineMod() {
         // Register the setup method for modloading

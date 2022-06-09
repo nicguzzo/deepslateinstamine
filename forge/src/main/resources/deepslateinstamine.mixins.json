@@ -3,7 +3,7 @@
   "minVersion": "0.8.5",
   "package": "net.nicguzzo.deepslateinstamine.mixin",
   "refmap": "mixins.deepslateinstamine.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
     "PlayerMixin",
     "LavaFluidMixin"

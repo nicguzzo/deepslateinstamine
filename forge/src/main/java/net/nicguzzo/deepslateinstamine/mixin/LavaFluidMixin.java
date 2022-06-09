@@ -22,8 +22,8 @@ public class LavaFluidMixin {
     private void spreadTo(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Direction direction,
             FluidState fluidState, CallbackInfo ci) {
 
-        if (DeepslateInstamineMod.CONFIG.enable_renewable_deepslate && 
-            blockPos.getY() < DeepslateInstamineMod.CONFIG.renewable_deepslate_below_level) {
+        if (DeepslateInstamineMod.config.enable_renewable_deepslate &&
+            blockPos.getY() < DeepslateInstamineMod.config.renewable_deepslate_below_level) {
             if (direction == Direction.DOWN) {
                 FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
                 if (fluidState2.is(FluidTags.WATER)) {

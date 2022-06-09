@@ -15,8 +15,10 @@ public class Config {
 	public boolean enable_renewable_deepslate = true;
 	public int renewable_deepslate_below_level = 11;
 	public boolean enable_logs_instamine = true;
+    public boolean enable_cobblestone_instamine=false;
+	public boolean enable_endstone_instamine=false;
 
-	public static void load_config() {
+    public static void load_config() {
 		INSTANCE = new Config();
 		Gson gson = new Gson();
 		File configFile = new File(DeepslateInstamineMod.get_config_dir(), "deepslate_instamine.json");

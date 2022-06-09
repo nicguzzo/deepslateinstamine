@@ -23,9 +23,9 @@
     "deepslateinstamine.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.2",
+    "fabricloader": ">=0.13.3",
     "fabric": "*",
-    "minecraft": "1.18.1",
+    "minecraft": "1.18.2",
     "java": ">=17"
   },
   "suggests": {
