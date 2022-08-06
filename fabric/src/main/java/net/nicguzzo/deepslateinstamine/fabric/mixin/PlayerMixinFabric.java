@@ -1,4 +1,4 @@
-package net.nicguzzo.deepslateinstamine.mixin;
+package net.nicguzzo.deepslateinstamine.fabric.mixin;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;

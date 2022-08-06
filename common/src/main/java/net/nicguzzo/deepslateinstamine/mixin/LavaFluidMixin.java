@@ -1,5 +1,6 @@
 package net.nicguzzo.deepslateinstamine.mixin;
 
+import net.nicguzzo.deepslateinstamine.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,18 +23,22 @@ public class LavaFluidMixin {
     private void spreadTo(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Direction direction,
             FluidState fluidState, CallbackInfo ci) {
 
-        if (DeepslateInstamineMod.config.enable_renewable_deepslate &&
+        if (DeepslateInstamineMod.config!=null){
+            if(DeepslateInstamineMod.config.enable_renewable_deepslate &&
             blockPos.getY() < DeepslateInstamineMod.config.renewable_deepslate_below_level) {
-            if (direction == Direction.DOWN) {
-                FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
-                if (fluidState2.is(FluidTags.WATER)) {
-                    if (blockState.getBlock() instanceof LiquidBlock) {
-                        levelAccessor.setBlock(blockPos, Blocks.DEEPSLATE.defaultBlockState(), 3);
+                if (direction == Direction.DOWN) {
+                    FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
+                    if (fluidState2.is(FluidTags.WATER)) {
+                        if (blockState.getBlock() instanceof LiquidBlock) {
+                            levelAccessor.setBlock(blockPos, Blocks.DEEPSLATE.defaultBlockState(), 3);
+                        }
+                        levelAccessor.levelEvent(1501, blockPos, 0);
+                        ci.cancel();
                     }
-                    levelAccessor.levelEvent(1501, blockPos, 0);
-                    ci.cancel();
                 }
             }
+        }else{
+                DeepslateInstamineMod.config = Config.get_instance();
         }
     }
 }
