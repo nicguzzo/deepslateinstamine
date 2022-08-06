@@ -1,0 +1,12 @@
+{
+  "minVersion": "0.8",
+  "required": true,
+  "package": "net.nicguzzo.deepslateinstamine.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "LavaFluidMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

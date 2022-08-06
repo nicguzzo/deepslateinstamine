@@ -1,6 +1,6 @@
 {
-    "pack": {
-        "description": "deepslateinstamine resources",
-        "pack_format": 8
-    }
+  "pack": {
+    "description": "Deepslate Instamine",
+    "pack_format": ${pack_format}
+  }
 }

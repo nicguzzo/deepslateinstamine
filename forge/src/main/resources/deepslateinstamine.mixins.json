@@ -1,14 +1,13 @@
 {
+  "minVersion": "0.8",
   "required": true,
-  "minVersion": "0.8.5",
-  "package": "net.nicguzzo.deepslateinstamine.mixin",
-  "refmap": "mixins.deepslateinstamine.refmap.json",
+  "package": "net.nicguzzo.deepslateinstamine.forge.mixin",
   "compatibilityLevel": "JAVA_16",
-  "mixins": [
-    "PlayerMixin",
-    "LavaFluidMixin"
+  "client": [
   ],
-  "client": [],
+  "mixins": [
+    "PlayerMixinForge"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

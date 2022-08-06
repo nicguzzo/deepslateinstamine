@@ -1,13 +1,13 @@
 {
-  "required": true,
   "minVersion": "0.8",
-  "package": "net.nicguzzo.deepslateinstamine.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "PlayerMixin",    
-    "LavaFluidMixin"
+  "required": true,
+  "package": "net.nicguzzo.deepslateinstamine.fabric.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "client": [
   ],
-  "client": [],
+  "mixins": [
+    "PlayerMixinFabric"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
