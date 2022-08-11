@@ -41,6 +41,7 @@ processResources {
     inputs.property "architectury_version", rootProject.architectury_version
     inputs.property "forge", rootProject.forge
     inputs.property "pack_format", rootProject.pack_format
+    inputs.property "mixin_compat", rootProject.mixin_compat
 
     filesMatching("META-INF/mods.toml") {
         expand (
@@ -52,6 +53,9 @@ processResources {
     }
     filesMatching("pack.mcmeta") {
         expand "pack_format": rootProject.pack_format
+    }
+    filesMatching("deepslateinstamine.mixins.json") {
+        expand "mixin_compat": rootProject.mixin_compat
     }
 }
 

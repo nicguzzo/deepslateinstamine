@@ -14,6 +14,13 @@ dependencies {
     modApi "${architectury}:architectury:${rootProject.architectury_version}"
 }
 
+processResources {
+    inputs.property "mixin_compat", rootProject.mixin_compat
+    filesMatching("deepslateinstamine-common.mixins.json") {
+        expand "mixin_compat": rootProject.mixin_compat
+    }
+}
+
 publishing {
     publications {
         mavenCommon(MavenPublication) {
