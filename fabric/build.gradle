@@ -42,7 +42,7 @@ processResources {
     inputs.property "version", project.version
     inputs.property "minecraftversion", rootProject.minecraft_version
     inputs.property "architecturyversion", rootProject.architectury_version
-    inputs.property "mixin_compat", rootProject.mixin_compat
+    inputs.property "java_version", rootProject.java_version
 
     filesMatching("fabric.mod.json") {
         expand ( 
@@ -52,7 +52,7 @@ processResources {
         )
     }
     filesMatching("deepslateinstamine.mixins.json") {
-        expand "mixin_compat": rootProject.mixin_compat
+        expand "java_version": rootProject.java_version
     }
 }
 

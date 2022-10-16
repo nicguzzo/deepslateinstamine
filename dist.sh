@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=2.1_release
+VERSION=2.2_release
 
 modloader=(fabric forge)
 mcvers=`ls |grep -P "mc1\..+"|tr "\n" " "|sed 's/mc//g'`

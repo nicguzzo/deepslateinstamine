@@ -31,27 +31,31 @@ public class DeepslateInstamineMod{
 	}
 	public static float instamine(BlockState blockState,Player player){
 		ItemStack itemStack = player.getMainHandItem();
-		Item item = itemStack.getItem();
-		int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
+		if(config==null)
+			config = Config.get_instance();
 
-		if(config!=null && j>=5 && player.hasEffect(MobEffects.DIG_SPEED) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)){
-			float speed = ((TieredItem) item).getTier().getSpeed();
-			MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);
-			if(eff!=null && eff.getAmplifier()>=1){
-				if(config.enable_logs_instamine && config.axes_item.contains(item)){
-					if(blockState.is(BlockTags.LOGS)) {
-						speed *= config.speed_factor;
-						return speed;
-					}
-				}else if(config.pickaxes_item.contains(item)){
-					if(config.pickaxe_instamine_blk.contains(blockState.getBlock())){
-						speed *= config.speed_factor;
-						return speed;
+
+		Item item = itemStack.getItem();
+
+		if(item instanceof TieredItem){
+			int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
+			if(config!=null && j>=5 && player.hasEffect(MobEffects.DIG_SPEED) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)){
+				float speed = ((TieredItem) item).getTier().getSpeed();
+				MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);
+				if(eff!=null && eff.getAmplifier()>=1){
+					if(config.enable_logs_instamine && config.axes_item.contains(item)){
+						if(blockState.is(BlockTags.LOGS)) {
+							speed *= config.speed_factor;
+							return speed;
+						}
+					}else if(config.pickaxes_item.contains(item)){
+						if(config.pickaxe_instamine_blk.contains(blockState.getBlock())){
+							speed *= config.speed_factor;
+							return speed;
+						}
 					}
 				}
 			}
-		}else{
-			config = Config.get_instance();
 		}
 		return -1.0f;
 	}

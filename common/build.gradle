@@ -15,9 +15,9 @@ dependencies {
 }
 
 processResources {
-    inputs.property "mixin_compat", rootProject.mixin_compat
+    inputs.property "java_version", rootProject.java_version
     filesMatching("deepslateinstamine-common.mixins.json") {
-        expand "mixin_compat": rootProject.mixin_compat
+        expand "java_version": rootProject.java_version
     }
 }
 

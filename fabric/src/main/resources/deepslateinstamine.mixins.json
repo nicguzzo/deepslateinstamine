@@ -2,7 +2,7 @@
   "minVersion": "0.8",
   "required": true,
   "package": "net.nicguzzo.deepslateinstamine.fabric.mixin",
-  "compatibilityLevel": "${mixin_compat}",
+  "compatibilityLevel": "JAVA_${java_version}",
   "client": [
   ],
   "mixins": [
