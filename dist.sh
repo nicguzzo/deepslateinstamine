@@ -1,28 +1,31 @@
 #!/bin/bash
 
-VERSION=2.2_release
-
+VERSION=2.3_release
+mod="DeepslateInstamine"
 modloader=(fabric forge)
-mcvers=`ls |grep -P "mc1\..+"|tr "\n" " "|sed 's/mc//g'`
 
+instances=~/minecraft/testing_instances
+deps=~/minecraft/dinstamine_deps
 
-for v in ${mcvers[@]}; do
-	for m in ${modloader[@]}; do
-	  lm=`echo "$m" | tr '[:upper:]' '[:lower:]'`	  
-	  echo " "
-	  echo "================="
-	  echo "$lm $v"
+pushd "versions"
+	mcvers=`ls |grep -P "mc1\..+"|tr "\n" " "|sed 's/mc//g'`
+	for v in ${mcvers[@]}; do
+		for m in ${modloader[@]}; do
+		  lm=`echo "$m" | tr '[:upper:]' '[:lower:]'`
+		  echo " "
+		  echo "================="
+		  echo "$lm $v"
 
-	  if [ -d ~/minecraft/testing_instances/test_${m}_${v}/.minecraft/mods/ ]; then
-	  		  	
-	  	if [ -f mc$v/$m/build/libs/DeepslateInstamine_mc$v-${VERSION}-$m.jar ]; then
-	  		rm ~/minecraft/testing_instances/test_${m}_${v}/.minecraft/mods/DeepslateInstamine*
-	  		cp mc$v/$m/build/libs/DeepslateInstamine_mc$v-${VERSION}-$m.jar ~/minecraft/testing_instances/test_${m}_${v}/.minecraft/mods/
-	  	fi
-	  	ls -1 ~/minecraft/testing_instances/test_${m}_${v}/.minecraft/mods/
-	  fi
-	  echo "================="
+		  if [ -d $instances/test_${m}_${v}/.minecraft/mods/ ]; then	  	
+		  	cp $deps/${m}/${v}/*.jar $instances/test_${m}_${v}/.minecraft/mods/
+		  	if [ -f mc$v/$m/build/libs/${mod}_mc$v-${VERSION}-$lm.jar ]; then
+		  		rm $instances/test_${m}_${v}/.minecraft/mods/${mod}*
+		  		cp mc$v/$m/build/libs/${mod}_mc$v-${VERSION}-$lm.jar $instances/test_${m}_${v}/.minecraft/mods/
+		  	fi
+		  	ls -1 $instances/test_${m}_${v}/.minecraft/mods/
+		  fi
+		  echo "================="
+		done
 	done
-done
 
-
+popd
