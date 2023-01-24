@@ -152,7 +152,7 @@ unifiedPublishing {
         if (mrToken != null) {
             modrinth {
                 //displayName= "Deepslate Instamine"
-                displayName= "v${rootProject.mod_version}${rootProject.release_type} fabric ${rootProject.minecraft_version}"
+                displayName= "Deepslate Instamine v${rootProject.mod_version} ${rootProject.release_type}"
                 token = mrToken
                 id = "g7kBNY9K" // Required, must be a string, ID of Modrinth project
             }
