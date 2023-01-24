@@ -4,7 +4,8 @@
   "package": "net.nicguzzo.deepslateinstamine.mixin",
   "compatibilityLevel": "JAVA_${java_version}",
   "mixins": [
-    "LavaFluidMixin"
+    "LavaFluidMixin",
+    "LiquidBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

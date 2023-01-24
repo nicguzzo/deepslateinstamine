@@ -44,7 +44,7 @@ public class DeepslateInstamineMod{
 				MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);
 				if(eff!=null && eff.getAmplifier()>=1){
 					if(config.enable_logs_instamine && config.axes_item.contains(item)){
-						if(blockState.is(BlockTags.LOGS)) {
+						if(blockState.is(BlockTags.LOGS) || config.axe_instamine_blk.contains(blockState.getBlock())){
 							speed *= config.speed_factor;
 							return speed;
 						}

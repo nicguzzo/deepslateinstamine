@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 #if MC>="1193"
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 #else
 import net.minecraft.core.Registry;
@@ -36,7 +35,9 @@ public class Config {
 	public String[] pickaxe_instamine_blocks={"minecraft:deepslate","minecraft:cobblestone","minecraft:end_stone"};
 	public String[] pickaxes_that_can_instamine={"minecraft:netherite_pickaxe"};
 	public String[] axes_that_can_instamine={"minecraft:netherite_axe"};
+	public String[] axe_instamine_blocks={};
 	static public List<Block> pickaxe_instamine_blk=new ArrayList<>();
+	static public List<Block> axe_instamine_blk=new ArrayList<>();
 	static public List<Item> pickaxes_item=new ArrayList<>();
 	static public List<Item> axes_item=new ArrayList<>();
 	public static final Logger LOGGER = LogManager.getLogger("deepslateinstamine");
@@ -73,7 +74,7 @@ public class Config {
 					if (item != null && item != Items.AIR) {
 						Block blk = Block.byItem(item);
 						if (blk != null) {
-							pickaxe_instamine_blk.add(blk);
+							Config.pickaxe_instamine_blk.add(blk);
 							LOGGER.info("Instamine block: "+blk);
 						}else{
 							LOGGER.info("This item: " + item+" can't be instamined, not a Block");
@@ -92,10 +93,30 @@ public class Config {
 					Item item = get_from_reg(res);
 					if (item != null && item != Items.AIR ) {
 						if(item instanceof DiggerItem) {
-							pickaxes_item.add(item);
+							Config.pickaxes_item.add(item);
 							LOGGER.info("Instamine pickaxe: " + item);
 						}else{
 							LOGGER.info("This item: " + item+" can't be used to instamine, not a DiggerItem");
+						}
+					}else{
+						LOGGER.info("item not found: " + id);
+					}
+				}else{
+					LOGGER.info("resource not found: " + id);
+				}
+			}
+			for (String id : INSTANCE.axe_instamine_blocks) {
+				LOGGER.info("trying: " + id);
+				ResourceLocation res = ResourceLocation.tryParse(id);
+				if (res != null) {
+					Item item = get_from_reg(res);
+					if (item != null && item != Items.AIR) {
+						Block blk = Block.byItem(item);
+						if (blk != null) {
+							Config.axe_instamine_blk.add(blk);
+							LOGGER.info("Instamine block: "+blk);
+						}else{
+							LOGGER.info("This item: " + item+" can't be instamined, not a Block");
 						}
 					}else{
 						LOGGER.info("item not found: " + id);
@@ -111,7 +132,7 @@ public class Config {
 					Item item = get_from_reg(res);
 					if (item != null && item != Items.AIR) {
 						if(item instanceof DiggerItem) {
-							axes_item.add(item);
+							Config.axes_item.add(item);
 							LOGGER.info("Instamine axe: " + item);
 						}else{
 							LOGGER.info("This item: " + item+" can't be used to instamine, not a DiggerItem");
