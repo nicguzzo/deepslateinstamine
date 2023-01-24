@@ -151,7 +151,8 @@ unifiedPublishing {
         var mrToken = System.getenv("MODRINTH_TOKEN")
         if (mrToken != null) {
             modrinth {
-                displayName= "Deepslate Instamine"
+                //displayName= "Deepslate Instamine"
+                displayName= "v${rootProject.mod_version}${rootProject.release_type} fabric ${rootProject.minecraft_version}"
                 token = mrToken
                 id = "g7kBNY9K" // Required, must be a string, ID of Modrinth project
             }
