@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=2.4_release
+VERSION=2.5_release
 mod="DeepslateInstamine"
 modloader=(fabric forge)
 
