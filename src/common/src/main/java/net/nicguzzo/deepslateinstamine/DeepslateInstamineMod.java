@@ -1,5 +1,14 @@
 package net.nicguzzo.deepslateinstamine;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -8,13 +17,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.block.state.BlockState;
 
 import dev.architectury.event.events.common.LifecycleEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 
 public class DeepslateInstamineMod{
@@ -38,7 +51,25 @@ public class DeepslateInstamineMod{
 		Item item = itemStack.getItem();
 
 		if(item instanceof TieredItem){
-			int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
+			ResourceKey<Enchantment> ef=Enchantments.EFFICIENCY;
+			//#if MC >="1206"
+				//Enchantment ef=Enchantments.EFFICIENCY;
+			//#else
+			//	Enchantment ef=Enchantments.BLOCK_EFFICIENCY;
+			//#endif
+
+			ItemEnchantments enchantments=itemStack.getEnchantments();
+			RegistryAccess registryAccess = player.level().registryAccess();
+			Registry<Enchantment> efficiency = registryAccess.registry(ef.registryKey()).orElse(null);
+			int j=0;
+			if(efficiency!=null){
+				Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.getHolder(ef.location());
+				if(efficiencyHolder.isPresent()){
+					j=EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder.get(),itemStack	);
+				}
+			}
+			//enchantments.getLevel(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.getHolder(ef.location()));
+
 			if(config!=null && j>=5 && player.hasEffect(MobEffects.DIG_SPEED) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)){
 				float speed = ((TieredItem) item).getTier().getSpeed();
 				MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);

@@ -19,11 +19,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-#if MC>="1193"
+//#if MC>="1193"
 import net.minecraft.core.registries.BuiltInRegistries;
-#else
-import net.minecraft.core.Registry;
-#endif
+//#else
+//import net.minecraft.core.Registry;
+//#endif
 
 public class Config {
 
@@ -154,10 +154,10 @@ public class Config {
 		return INSTANCE;
 	}
 	static Item get_from_reg(ResourceLocation res){
-		#if MC>="1193"
+		//#if MC>="1193"
 		return BuiltInRegistries.ITEM.get(res);
-		#else
-		return Registry.ITEM.get(res);
-		#endif
+		//#else
+		//return Registry.ITEM.get(res);
+		//#endif
 	}
 }

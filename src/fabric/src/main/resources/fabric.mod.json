@@ -17,9 +17,6 @@
   "entrypoints": {
     "main": [
       "net.nicguzzo.deepslateinstamine.fabric.DeepslateInstamineModFabric"
-    ],
-    "modmenu": [
-      "net.nicguzzo.deepslateinstamine.fabric.ModMenu"
     ]
   },
   "mixins": [
@@ -30,8 +27,5 @@
     "fabric": "*",
     "minecraft": ">=${minecraft_version}",
     "architectury": ">=${architectury_version}"
-  },
-  "suggests": {
-    "modmenu": "*"
   }
 }
