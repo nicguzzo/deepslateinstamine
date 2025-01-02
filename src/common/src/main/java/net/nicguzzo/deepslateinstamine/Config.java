@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
-
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
@@ -154,10 +154,14 @@ public class Config {
 		return INSTANCE;
 	}
 	static Item get_from_reg(ResourceLocation res){
-		//#if MC>="1193"
-		return BuiltInRegistries.ITEM.get(res);
-		//#else
-		//return Registry.ITEM.get(res);
-		//#endif
+		#if MC>="1193"
+			#if MC>="1213"
+        		return BuiltInRegistries.ITEM.get(res).map(Holder.Reference::value).orElse(null);
+			#else
+				return BuiltInRegistries.ITEM.get(res);
+			#endif
+		#else
+			return Registry.ITEM.get(res);
+		#endif
 	}
 }

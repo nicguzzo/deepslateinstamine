@@ -11,9 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public class PlayerMixinNeoForge {
-	//,remap=false
+#if MC <"1214"
 	@Inject(at = @At("HEAD"), cancellable = true, method = "getDigSpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F",remap=false)
 	private void getDigSpeed(BlockState blockState, BlockPos pos, CallbackInfoReturnable<Float> cir) {
+#else
+	@Inject(at = @At("HEAD"), cancellable = true, method = "getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F")
+	private void getDestroySpeed(BlockState blockState,BlockPos pos, CallbackInfoReturnable<Float> cir) {
+#endif
 		if(blockState !=null){
 			float s=DeepslateInstamineMod.instamine(blockState,(Player)(Object)this);
 			if(s!=-1.0f)

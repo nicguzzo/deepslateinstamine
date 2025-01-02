@@ -13,10 +13,10 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TieredItem;
+
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -50,28 +50,69 @@ public class DeepslateInstamineMod{
 
 		Item item = itemStack.getItem();
 
+		#if MC <"1206"
 		if(item instanceof TieredItem){
-			ResourceKey<Enchantment> ef=Enchantments.EFFICIENCY;
-			//#if MC >="1206"
-				//Enchantment ef=Enchantments.EFFICIENCY;
-			//#else
-			//	Enchantment ef=Enchantments.BLOCK_EFFICIENCY;
-			//#endif
+		#else
+		if(item instanceof DiggerItem){
+		#endif
+			int j=0;
+			#if MC >="1206"
+				RegistryAccess registryAccess = player.level().registryAccess();
+				#if MC >="1211"
+					ResourceKey<Enchantment> ef=Enchantments.EFFICIENCY;
+					#if MC >="1214"
+						Registry<Enchantment> efficiency = registryAccess.lookup(ef.registryKey()).orElse(null);
+					#else
+						Registry<Enchantment> efficiency = registryAccess.registry(ef.registryKey()).orElse(null);
+					#endif
+					if(efficiency!=null){
+						#if MC >="1214"
+							Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.get(ef.location());
+						#else
+							Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.getHolder(ef.location());
+						#endif
+						if(efficiencyHolder.isPresent()){
+							j=EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder.get(),itemStack	);
+						}
+					}
+				#else
+					Enchantment ef=Enchantments.EFFICIENCY;
+					Registry<Enchantment> efficiency = registryAccess.lookup(ef.registryKey()).orElse(null);
+					if(efficiency!=null){
+						Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.get(ef.location());
+						if(efficiencyHolder.isPresent()){
+							j=EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder.get(),itemStack	);
+						}
+					}
+				#endif
+			#else
+				j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
+			#endif
 
 			ItemEnchantments enchantments=itemStack.getEnchantments();
-			RegistryAccess registryAccess = player.level().registryAccess();
-			Registry<Enchantment> efficiency = registryAccess.registry(ef.registryKey()).orElse(null);
-			int j=0;
-			if(efficiency!=null){
-				Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.getHolder(ef.location());
-				if(efficiencyHolder.isPresent()){
-					j=EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder.get(),itemStack	);
-				}
-			}
+			//RegistryAccess registryAccess = player.level().registryAccess();
+
+			//#if MC >="1213"
+			//	Registry<Enchantment> efficiency = registryAccess.lookup(ef.registryKey()).orElse(null);
+			//	#if MC >="1211"
+			//		Registry<Enchantment> efficiency = registryAccess.registry(ef.registryKey()).orElse(null);
+			//	#endif
+			//#endif
+
+			//if(efficiency!=null){
+			//	Optional<Holder.Reference<Enchantment>> efficiencyHolder=efficiency.get(ef.location());
+			//	if(efficiencyHolder.isPresent()){
+			//		j=EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder.get(),itemStack	);
+			//	}
+			//}
 			//enchantments.getLevel(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.getHolder(ef.location()));
 
-			if(config!=null && j>=5 && player.hasEffect(MobEffects.DIG_SPEED) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)){
-				float speed = ((TieredItem) item).getTier().getSpeed();
+			if(j>=5 && player.hasEffect(MobEffects.DIG_SPEED) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)){
+
+				//this.getAttributeValue(Attributes.BLOCK_BREAK_SPEED);
+
+				//float speed = ((DiggerItem) item).getTier().getSpeed();
+				float speed = item.getDestroySpeed(itemStack, blockState);
 				MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);
 				if(eff!=null && eff.getAmplifier()>=1){
 					if(config.enable_logs_instamine && config.axes_item.contains(item)){

@@ -1,5 +1,5 @@
 plugins {    
-    id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "com.github.johnrengelman.shadow" version "8.1.1"
 //    id 'systems.manifold.manifold-gradle-plugin' version '0.0.2-alpha'
@@ -41,8 +41,8 @@ subprojects {
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
-        //annotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.20'
-        //testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.20'
+        annotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.0'
+        testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.0'
     }
 
     java {
@@ -57,7 +57,7 @@ subprojects {
 
     tasks.withType(JavaCompile).configureEach {
         it.options.release =  rootProject.java_version as Integer 
-        //it.options.compilerArgs += ['-Xplugin:Manifold']
+        it.options.compilerArgs += ['-Xplugin:Manifold']
     }
 }
 
