@@ -12,8 +12,13 @@ import com.google.gson.GsonBuilder;
 
 
 import net.minecraft.core.Holder;
+
 import net.minecraft.resources.ResourceLocation;
+#if MC<"1215"
 import net.minecraft.world.item.DiggerItem;
+#else
+	import net.minecraft.core.component.DataComponents;
+#endif
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -92,7 +97,11 @@ public class Config {
 				if (res != null) {
 					Item item = get_from_reg(res);
 					if (item != null && item != Items.AIR ) {
+						#if MC>="1215"
+						if(item.getDefaultInstance().getComponents().has(DataComponents.TOOL)){
+						#else
 						if(item instanceof DiggerItem) {
+						#endif
 							Config.pickaxes_item.add(item);
 							LOGGER.info("Instamine pickaxe: " + item);
 						}else{
@@ -131,7 +140,11 @@ public class Config {
 				if (res != null) {
 					Item item = get_from_reg(res);
 					if (item != null && item != Items.AIR) {
+						#if MC>="1215"
+						if(item.getDefaultInstance().getComponents().has(DataComponents.TOOL)){
+						#else
 						if(item instanceof DiggerItem) {
+						#endif
 							Config.axes_item.add(item);
 							LOGGER.info("Instamine axe: " + item);
 						}else{
