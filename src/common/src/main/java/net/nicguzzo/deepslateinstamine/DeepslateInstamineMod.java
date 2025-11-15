@@ -115,6 +115,7 @@ public class DeepslateInstamineMod{
 				MobEffectInstance eff= player.getEffect(MobEffects.DIG_SPEED);
 				#endif
 				if(eff!=null && eff.getAmplifier()>=1){
+					//LOGGER.info("Eff 5 haste 2");
 					if(config.enable_logs_instamine && config.axes_item.contains(item)){
 						if(blockState.is(BlockTags.LOGS) || config.axe_instamine_blk.contains(blockState.getBlock())){
 							speed *= config.speed_factor;
@@ -123,6 +124,7 @@ public class DeepslateInstamineMod{
 					}else if(config.pickaxes_item.contains(item)){
 						if(config.pickaxe_instamine_blk.contains(blockState.getBlock())){
 							speed *= config.speed_factor;
+							//LOGGER.info("pick speed "+speed);
 							return speed;
 						}
 					}

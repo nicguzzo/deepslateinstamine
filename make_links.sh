@@ -8,7 +8,7 @@ export MSYS=winsymlinks:nativestrict
 
 #mcvers=( "1.21.1","1.21.2","1.21.3")
 #mcvers=( "1.21.4")
-mcvers=( "1.21.5")
+mcvers=( "1.21.9")
 
 pushd "versions"
   for v in ${mcvers[@]}; do  
