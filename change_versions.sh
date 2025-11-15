@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=2.5.1
+VERSION=2.5.2
 TYPE=release
 sed -i "s/VERSION=.*/VERSION=${VERSION}_${TYPE}/" dist.sh
 pushd "versions"
