@@ -54,7 +54,7 @@ modstitch {
     metadata {
         modId = "deepslateinstamine"
         modName = "Deepslateinstamine"
-        modVersion = "2.6.0"
+        modVersion = "2.6.1"
         modGroup = "net.nicguzzo"
         modAuthor = "Nicguzzo"
 

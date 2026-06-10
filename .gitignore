@@ -32,3 +32,4 @@ bin/
 
 run/
 versions/mc*
+test-env

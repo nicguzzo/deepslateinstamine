@@ -1,6 +1,6 @@
 //? if neoforge {
 
-package net.nicguzzo.deepslateinstamine.loaders.neoforge.mixin;
+/*package net.nicguzzo.deepslateinstamine.loaders.neoforge.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -18,9 +18,9 @@ public class PlayerMixinNeoForge {
 	private void getDestroySpeed(BlockState blockState,BlockPos pos, CallbackInfoReturnable<Float> cir) {
 	
 //?} else {
-	/*@Inject(at = @At("HEAD"), cancellable = true, method = "getDigSpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F",remap=false)
+	/^@Inject(at = @At("HEAD"), cancellable = true, method = "getDigSpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F",remap=false)
 	private void getDigSpeed(BlockState blockState, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-*///?}
+^///?}
 		if(blockState !=null){
 			float s=DeepslateInstamineMod.instamine(blockState,(Player)(Object)this);
 			if(s!=-1.0f)
@@ -29,4 +29,4 @@ public class PlayerMixinNeoForge {
 	}
 }
 
-//?}
+*///?}

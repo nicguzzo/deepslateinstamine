@@ -15,6 +15,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 /*import net.minecraft.world.item.TieredItem;
 *///?}
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -58,7 +59,22 @@ public class DeepslateInstamineMod{
 		if(config==null)
 			config = Config.get_instance();
 	}
+	public static void onServerStarted(MinecraftServer server) {
+        // The server is fully initialized and the worlds are loaded.
+        // Run your post-initialization code here!
+        DeepslateInstamineMod.initialize();
+    }
+
+    public static void onJoin(){
+		if(config==null)
+			config = Config.get_instance();
+    }
+    public static void onDisconnect(){
+
+    }
 	public static float instamine(BlockState blockState,Player player){
+		if(config==null)
+			config = Config.get_instance();
 		ItemStack itemStack = player.getMainHandItem();
 
 		Item item = itemStack.getItem();

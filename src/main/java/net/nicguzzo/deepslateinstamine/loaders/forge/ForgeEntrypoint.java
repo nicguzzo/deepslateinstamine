@@ -7,7 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.nicguzzo.deepslateinstamine.DeepslateInstamineCommon;
+import net.nicguzzo.deepslateinstamine.DeepslateInstamineMod;
 import net.nicguzzo.deepslateinstamine.Config;
 import org.slf4j.Logger;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -25,7 +25,7 @@ public class ForgeEntrypoint {
     public void onServerStarted(ServerStartedEvent event) {
         Path configDir = FMLPaths.CONFIGDIR.get();
         Config.configDir=configDir.toString();
-        DeepslateInstamineCommon.onServerStarted(event.getServer());
+        DeepslateInstamineMod.onServerStarted(event.getServer());
     }
 }
 *///?}
