@@ -73,7 +73,7 @@
   },
   {
     "name": "26.2-NeoForge",
-    "game_version": "26.2",
+    "game_version": "26.2:unstable",
     "loader": "neoforge",
     "jar_dir": "./versions/26.2-neoforge/build/libs",
     "dependencies": [],
