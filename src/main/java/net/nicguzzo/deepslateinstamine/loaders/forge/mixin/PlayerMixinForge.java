@@ -1,6 +1,6 @@
 //? if forge {
 
-package net.nicguzzo.deepslateinstamine.loaders.forge.mixin;
+/*package net.nicguzzo.deepslateinstamine.loaders.forge.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -24,4 +24,4 @@ public class PlayerMixinForge {
 }
 
  
-//?}
+*///?}

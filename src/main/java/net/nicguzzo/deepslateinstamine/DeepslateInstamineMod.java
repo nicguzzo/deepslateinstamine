@@ -2,18 +2,18 @@ package net.nicguzzo.deepslateinstamine;
 
 
 //? if >= 1.21.5 {
-/*import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
-*///?}
+//?}
 
 //? if >= 1.21.1 && < 1.21.5 {
 /*import net.minecraft.world.item.DiggerItem;
 *///?}
 
 //? if < 1.21.1 {
-import net.minecraft.world.item.TieredItem;
-//?}
+/*import net.minecraft.world.item.TieredItem;
+*///?}
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.core.Holder;
@@ -85,19 +85,19 @@ public class DeepslateInstamineMod{
 
 			//ItemEnchantments enchantments=itemStack.getEnchantments();
 			//? if >=1.21.5 {
-		     /*Holder<MobEffect> haste=MobEffects.HASTE;
+		     Holder<MobEffect> haste=MobEffects.HASTE;
 			 Holder<MobEffect> fatigue=MobEffects.MINING_FATIGUE;
 			
-			*///?} else {
-    			//? if >=1.21.1 {
-    			/*Holder<MobEffect> haste= MobEffects.DIG_SPEED;
+			//?} else {
+    			/*//? if >=1.21.1 {
+    			Holder<MobEffect> haste= MobEffects.DIG_SPEED;
     			Holder<MobEffect> fatigue=MobEffects.DIG_SLOWDOWN;
     			
-    			*///?} else {
-    			MobEffect haste= MobEffects.DIG_SPEED;
+    			//?} else {
+    			/^MobEffect haste= MobEffects.DIG_SPEED;
     			MobEffect fatigue=MobEffects.DIG_SLOWDOWN;
-                //?}
-			//?}
+                ^///?}
+			*///?}
 
 			if(j>=5 && player.hasEffect(haste) && !player.hasEffect(fatigue))
 			{
@@ -125,51 +125,51 @@ public class DeepslateInstamineMod{
 	}
 	public static boolean is_tool(ItemStack itemStack){
 		//? if >= 1.21.5 {
-		 /*return itemStack.getComponents().has(DataComponents.TOOL); 
-		*///?} else {
-			//? if >=1.20.6 {
-					/*return (itemStack.getItem() instanceof DiggerItem);
-			*///?} else {
-					return (itemStack.getItem() instanceof TieredItem);
-			//?}
-		//?}
+		 return itemStack.getComponents().has(DataComponents.TOOL); 
+		//?} else {
+			/*//? if >=1.20.6 {
+					return (itemStack.getItem() instanceof DiggerItem);
+			//?} else {
+					/^return (itemStack.getItem() instanceof TieredItem);
+			^///?}
+		*///?}
 	}
 
 	public static boolean is_tool(Item item){
 		//? if >= 1.21.5 {
-		 /*return item.getDefaultInstance().getComponents().has(DataComponents.TOOL); 
-		*///?} else {
-			//? if >=1.20.6 {
-					/*return (item instanceof DiggerItem);
-			*///?} else {
-					return (item instanceof TieredItem);
-			//?}
-		//?}
+		 return item.getDefaultInstance().getComponents().has(DataComponents.TOOL); 
+		//?} else {
+			/*//? if >=1.20.6 {
+					return (item instanceof DiggerItem);
+			//?} else {
+					/^return (item instanceof TieredItem);
+			^///?}
+		*///?}
 	}
 
 	public static int get_eff_level(Player player,ItemStack itemStack) {
 		int j=0;
 		//? if >= 1.21.4 {
-		    /*RegistryAccess registryAccess = player.level().registryAccess();
+		    RegistryAccess registryAccess = player.level().registryAccess();
 			Holder<Enchantment> efficiencyHolder = registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.EFFICIENCY);
 			j = EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder, itemStack);
 		
-		*///?} else {
-			//? if >= 1.21.1 {
-			  	/*RegistryAccess registryAccess = player.level().registryAccess();
+		//?} else {
+			/*//? if >= 1.21.1 {
+			  	RegistryAccess registryAccess = player.level().registryAccess();
 				Holder.Reference<Enchantment> efficiencyHolder = registryAccess.registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.EFFICIENCY);
 				j = EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder, itemStack);
-			*///?} else {
-				//? if >= 1.20.6 {
-					/*RegistryAccess registryAccess = player.level().registryAccess();
+			//?} else {
+				/^//? if >= 1.20.6 {
+					RegistryAccess registryAccess = player.level().registryAccess();
 					Holder.Reference<Enchantment> efficiencyHolder = registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.EFFICIENCY);
 					j = EnchantmentHelper.getItemEnchantmentLevel(efficiencyHolder, itemStack);
 
-				*///?} else {
-					 j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
-				//?}
-			//?}
-		//?}
+				//?} else {
+					 /^¹j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, itemStack);
+				¹^///?}
+			^///?}
+		*///?}
 		return j;
 	}
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -86,7 +86,7 @@ public class Config {
 
             for (String id : INSTANCE.pickaxe_instamine_blocks) {
                 LOGGER.info("trying: " + id);
-                ResourceLocation res = ResourceLocation.tryParse(id);
+                Identifier res = Identifier.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -110,7 +110,7 @@ public class Config {
             }
             for (String id : INSTANCE.pickaxes_that_can_instamine) {
                 LOGGER.info("trying: " + id);
-                ResourceLocation res = ResourceLocation.tryParse(id);
+                Identifier res = Identifier.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -133,7 +133,7 @@ public class Config {
             }
             for (String id : INSTANCE.axe_instamine_blocks) {
                 LOGGER.info("trying: " + id);
-                ResourceLocation res = ResourceLocation.tryParse(id);
+                Identifier res = Identifier.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -157,7 +157,7 @@ public class Config {
             }
             for (String id : INSTANCE.axes_that_can_instamine) {
                 LOGGER.info("trying: " + id);
-                ResourceLocation res = ResourceLocation.tryParse(id);
+                Identifier res = Identifier.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -190,13 +190,13 @@ public class Config {
         return INSTANCE;
     }
 
-    static Item get_from_reg(ResourceLocation res) {
+    static Item get_from_reg(Identifier res) {
 
         //? if >=1.21.3 {
-        /*return BuiltInRegistries.ITEM.get(res).map(Holder.Reference::value).orElse(null);
-        *///?} elif >=1.19.3 {
-        return BuiltInRegistries.ITEM.get(res);
-        //?} else {
+        return BuiltInRegistries.ITEM.get(res).map(Holder.Reference::value).orElse(null);
+        //?} elif >=1.19.3 {
+        /*return BuiltInRegistries.ITEM.get(res);
+        *///?} else {
         /*return Registry.ITEM.get(res);*/
         //?}
 
