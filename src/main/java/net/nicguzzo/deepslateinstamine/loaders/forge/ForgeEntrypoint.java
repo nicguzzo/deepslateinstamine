@@ -1,5 +1,5 @@
 //? if forge {
-/*package net.nicguzzo.deepslateinstamine.loaders.forge;
+package net.nicguzzo.deepslateinstamine.loaders.forge;
 
 
 import com.mojang.logging.LogUtils;
@@ -28,4 +28,4 @@ public class ForgeEntrypoint {
         DeepslateInstamineMod.onServerStarted(event.getServer());
     }
 }
-*///?}
+//?}

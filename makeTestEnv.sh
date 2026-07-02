@@ -292,6 +292,7 @@ for (( i=0; i<$INSTANCE_COUNT; i++ )); do
     GAME_VER=$(jq -r ".[$i].game_version" "$INSTANCES_FILE")
     LOADER=$(jq -r ".[$i].loader" "$INSTANCES_FILE")
     JAR_DIR=$(jq -r ".[$i].jar_dir" "$INSTANCES_FILE")
+    JAVA_BIN=$(jq -r ".[$i].java_bin // \"java\"" "$INSTANCES_FILE")
 
     echo -e "\n>>> Configuring instance: $NAME"
 
@@ -364,7 +365,7 @@ SCRIPT_DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 MAIN_DIR="\$SCRIPT_DIR/instances/$NAME/.minecraft"
 
 # Execute PortableMC
-$LAUNCHER_CALL --main-dir "\$MAIN_DIR" start "${LOADER}:${GAME_VER}" -u "$PLAYER_NAME"
+$LAUNCHER_CALL --main-dir "\$MAIN_DIR" start --jvm "$JAVA_BIN" "${LOADER}:${GAME_VER}" -u "$PLAYER_NAME"
 EOF
 
     chmod +x "$LAUNCH_SCRIPT"
@@ -388,7 +389,7 @@ SCRIPT_DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 MAIN_DIR="\$SCRIPT_DIR/instances/$NAME-guest/.minecraft"
 
 # Execute PortableMC (different player, separate game dir for LAN testing)
-$LAUNCHER_CALL --main-dir "\$MAIN_DIR" start "${LOADER}:${GAME_VER}" -u "$GUEST_NAME"
+$LAUNCHER_CALL --main-dir "\$MAIN_DIR" start --jvm "$JAVA_BIN" "${LOADER}:${GAME_VER}" -u "$GUEST_NAME"
 EOF
 
     chmod +x "$GUEST_SCRIPT"
@@ -414,15 +415,15 @@ EOF
 
             if [ ! -f "$SERVER_DIR/eula.txt" ]; then
                 echo "  -> Running server installer (this may take a moment)..."
-                if ! command -v java &> /dev/null; then
-                    echo "  -> WARNING: Global 'java' command not found. Cannot run server installer!"
+                if ! command -v "$JAVA_BIN" &> /dev/null && [ ! -f "$JAVA_BIN" ]; then
+                    echo "  -> WARNING: '$JAVA_BIN' command not found. Cannot run server installer!"
                 else
                     # Enter the server directory so files are generated in the correct place
                     pushd "$SERVER_DIR" >/dev/null
                     if [ "$LOADER" == "fabric" ]; then
-                        java -jar "../../modrinth-cache/installer-$NAME.jar" server -mcversion "$GAME_VER" -downloadMinecraft >/dev/null 2>&1
+                        "$JAVA_BIN" -jar "../../modrinth-cache/installer-$NAME.jar" server -mcversion "$GAME_VER" -downloadMinecraft >/dev/null 2>&1
                     else
-                        java -jar "../../modrinth-cache/installer-$NAME.jar" --installServer >/dev/null 2>&1
+                        "$JAVA_BIN" -jar "../../modrinth-cache/installer-$NAME.jar" --installServer >/dev/null 2>&1
                     fi
                     echo "eula=true" > eula.txt
                     popd >/dev/null
@@ -433,12 +434,15 @@ EOF
             rm -f "$SERVER_MODS_DIR"/*.jar
             cp -u "$MODS_DIR"/*.jar "$SERVER_MODS_DIR/" 2>/dev/null
 
-            SERVER_SCRIPT="$TEST_ENV_DIR/launch-$NAME-server.sh"
+SERVER_SCRIPT="$TEST_ENV_DIR/launch-$NAME-server.sh"
             cat <<EOF > "$SERVER_SCRIPT"
 #!/usr/bin/env bash
 echo "Starting $NAME Server Environment..."
 
 cd "\$(dirname "\$0")/servers/$NAME" || exit 1
+
+export JAVA_HOME="\$(dirname "\$(dirname "$JAVA_BIN")")"
+export PATH="\$JAVA_HOME/bin:\$PATH"
 
 # 1. Windows native Java requires ';' for classpaths. Forge's run.sh provides ':'.
 # In Git Bash on Windows, we must use cmd.exe to launch run.bat so it grabs win_args.txt!
@@ -453,12 +457,12 @@ fi
 if [ -f "run.sh" ]; then
     bash run.sh nogui
 elif [ -f "fabric-server-launch.jar" ]; then
-    java -Xmx2G -jar fabric-server-launch.jar nogui
+    "$JAVA_BIN" -Xmx2G -jar fabric-server-launch.jar nogui
 else
     # Fallback if standard names are missing
     SERVER_JAR=\$(ls *.jar 2>/dev/null | grep -Ev "installer" | head -n 1)
     if [ -n "\$SERVER_JAR" ]; then
-        java -Xmx2G -jar "\$SERVER_JAR" nogui
+        "$JAVA_BIN" -Xmx2G -jar "\$SERVER_JAR" nogui
     else
         echo "ERROR: Could not find a valid server executable or script in servers/$NAME"
     fi

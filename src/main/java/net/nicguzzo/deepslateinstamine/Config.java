@@ -8,8 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -35,10 +37,10 @@ public class Config {
     };
     public String[] axes_that_can_instamine = { "minecraft:netherite_axe" };
     public String[] axe_instamine_blocks = {};
-    public static List<Block> pickaxe_instamine_blk = new ArrayList<>();
-    public static List<Block> axe_instamine_blk = new ArrayList<>();
-    public static List<Item> pickaxes_item = new ArrayList<>();
-    public static List<Item> axes_item = new ArrayList<>();
+    public static Set<Block> pickaxe_instamine_blk = new HashSet<>();
+    public static Set<Block> axe_instamine_blk = new HashSet<>();
+    public static Set<Item> pickaxes_item = new HashSet<>();
+    public static Set<Item> axes_item = new HashSet<>();
     public static final Logger LOGGER = LogManager.getLogger(
         "deepslateinstamine"
     );
@@ -77,9 +79,14 @@ public class Config {
             }
         }
         if (INSTANCE != null) {
+            pickaxe_instamine_blk.clear();
+            axe_instamine_blk.clear();
+            pickaxes_item.clear();
+            axes_item.clear();
+
             for (String id : INSTANCE.pickaxe_instamine_blocks) {
                 LOGGER.info("trying: " + id);
-                Identifier res = Identifier.tryParse(id);
+                ResourceLocation res = ResourceLocation.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -103,7 +110,7 @@ public class Config {
             }
             for (String id : INSTANCE.pickaxes_that_can_instamine) {
                 LOGGER.info("trying: " + id);
-                Identifier res = Identifier.tryParse(id);
+                ResourceLocation res = ResourceLocation.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -126,7 +133,7 @@ public class Config {
             }
             for (String id : INSTANCE.axe_instamine_blocks) {
                 LOGGER.info("trying: " + id);
-                Identifier res = Identifier.tryParse(id);
+                ResourceLocation res = ResourceLocation.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -150,7 +157,7 @@ public class Config {
             }
             for (String id : INSTANCE.axes_that_can_instamine) {
                 LOGGER.info("trying: " + id);
-                Identifier res = Identifier.tryParse(id);
+                ResourceLocation res = ResourceLocation.tryParse(id);
                 if (res != null) {
                     Item item = get_from_reg(res);
                     if (item != null && item != Items.AIR) {
@@ -183,13 +190,13 @@ public class Config {
         return INSTANCE;
     }
 
-    static Item get_from_reg(Identifier res) {
+    static Item get_from_reg(ResourceLocation res) {
 
         //? if >=1.21.3 {
-        return BuiltInRegistries.ITEM.get(res).map(Holder.Reference::value).orElse(null);
-        //?} elif >=1.19.3 {
-        /*return BuiltInRegistries.ITEM.get(res);
-        *///?} else {
+        /*return BuiltInRegistries.ITEM.get(res).map(Holder.Reference::value).orElse(null);
+        *///?} elif >=1.19.3 {
+        return BuiltInRegistries.ITEM.get(res);
+        //?} else {
         /*return Registry.ITEM.get(res);*/
         //?}
 

@@ -1,5 +1,46 @@
 [
-
+  {
+    "name": "1.20.1-Fabric",
+    "game_version": "1.20.1",
+    "loader": "fabric",
+    "jar_dir": "./versions/1.20.1-fabric/build/libs",
+    "dependencies": ["fabric-api"],
+    "optional_dependencies": [],
+    "optional_curseforge_dependencies": [],
+    "server_installer_url": "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar",
+    "java_bin": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"
+  },
+  {
+    "name": "1.20.1-Forge",
+    "game_version": "1.20.1",
+    "loader": "forge",
+    "jar_dir": "./versions/1.20.1-forge/build/libs",
+    "dependencies": [],
+    "optional_dependencies": [],
+    "optional_curseforge_dependencies": [],
+    "server_installer_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.10/forge-1.20.1-47.4.10-installer.jar",
+    "java_bin": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"
+  },
+  {
+    "name": "1.21.1-Fabric",
+    "game_version": "1.21.1",
+    "loader": "fabric",
+    "jar_dir": "./versions/1.21.1-fabric/build/libs",
+    "dependencies": ["fabric-api", "modmenu"],
+    "optional_dependencies": [],
+    "server_installer_url": "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar",
+    "java_bin": "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+  },
+  {
+    "name": "1.21.1-Neoforge",
+    "game_version": "1.21.1",
+    "loader": "neoforge",
+    "jar_dir": "./versions/1.21.1-neoforge/build/libs",
+    "dependencies": ["fabric-api"],
+    "optional_dependencies": [],
+    "server_installer_url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.219/neoforge-21.1.219-installer.jar",
+    "java_bin": "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+  },
   {
     "name": "26.1.2-Fabric",
     "game_version": "26.1.2",
@@ -8,7 +49,7 @@
     "dependencies": ["fabric-api", "modmenu"],
     "optional_dependencies": [],
     "server_installer_url": "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar",
-    "java_key": "java_25"
+    "java_bin": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java"
   },
   {
     "name": "26.1.2-NeoForge",
@@ -18,6 +59,26 @@
     "dependencies": [],
     "optional_dependencies": [],
     "server_installer_url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/26.1.2.68-beta/neoforge-26.1.2.68-beta-installer.jar",
-    "java_key": "java_25"
+    "java_bin": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java"
+  },
+  {
+    "name": "26.2-Fabric",
+    "game_version": "26.2",
+    "loader": "fabric",
+    "jar_dir": "./versions/26.2-fabric/build/libs",
+    "dependencies": ["fabric-api", "modmenu"],
+    "optional_dependencies": [],
+    "server_installer_url": "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar",
+    "java_bin": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java"
+  },
+  {
+    "name": "26.2-NeoForge",
+    "game_version": "26.2",
+    "loader": "neoforge",
+    "jar_dir": "./versions/26.2-neoforge/build/libs",
+    "dependencies": [],
+    "optional_dependencies": [],
+    "server_installer_url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/26.2.0.7-beta/neoforge-26.2.0.7-beta-installer.jar",
+    "java_bin": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java"
   }
 ]

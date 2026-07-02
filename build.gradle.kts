@@ -54,7 +54,7 @@ modstitch {
     metadata {
         modId = "deepslateinstamine"
         modName = "Deepslateinstamine"
-        modVersion = "2.6.1"
+        modVersion = "2.6.2"
         modGroup = "net.nicguzzo"
         modAuthor = "Nicguzzo"
 
@@ -72,6 +72,7 @@ modstitch {
                 "1.21.1" -> "[1.21.1,)"
                 "1.21.9" -> "[1.21.9,1.21.11)"
                 "26.1.2" -> "[26.1.2,)"
+                "26.2" -> "[26.2,)"
                 else -> throw IllegalArgumentException("Please set mc range version for ${property("deps.minecraft")} in build.gradle.kts")
             })
             put("forge_version_range", when (property("deps.minecraft")) {
@@ -79,6 +80,7 @@ modstitch {
                 "1.21.1" -> ""
                 "1.21.9" -> ""
                 "26.1.2" -> ""
+                "26.2" -> ""
                 else -> throw IllegalArgumentException("Please set forge version for ${property("deps.minecraft")} in build.gradle.kts")
             })
 
@@ -86,7 +88,8 @@ modstitch {
                 "1.20.1" -> 15
                 "1.21.1" -> 34
                 "1.21.9" -> 69
-                "26.1.2" -> 14
+                "26.1.2" -> 84
+                "26.2" -> 88
                 else -> throw IllegalArgumentException("Please store the resource pack version for ${property("deps.minecraft")} in build.gradle.kts! https://minecraft.wiki/w/Pack_format")
             }.toString())
         }

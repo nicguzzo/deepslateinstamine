@@ -1,5 +1,5 @@
 //? if fabric {
-package net.nicguzzo.deepslateinstamine.loaders.fabric;
+/*package net.nicguzzo.deepslateinstamine.loaders.fabric;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -30,4 +30,4 @@ public class FabricEntrypoint implements ModInitializer {
         });
     }
 }
-//?}
+*///?}

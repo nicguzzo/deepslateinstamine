@@ -43,10 +43,11 @@ stonecutter {
         mc("1.21.1", loaders = listOf("fabric","neoforge"))
         mc("1.21.9", loaders = listOf("fabric","neoforge"))
         mc("26.1.2", loaders = listOf("fabric", "neoforge"))
+        mc("26.2", loaders = listOf("fabric", "neoforge"))
 
         // This is the default target.
         // https://stonecutter.kikugie.dev/stonecutter/guide/setup#settings-settings-gradle-kts
-        vcsVersion = "26.1.2-fabric"
+        vcsVersion = "26.2-fabric"
     }
 }
 gradle.beforeProject {
@@ -60,13 +61,13 @@ gradle.beforeProject {
             preCommitHook.writeText(
                 """
                 #!/bin/bash
-                
+
                 vcs_version=$(grep -oP 'vcsVersion\s*=\s*"\K[^"]+' settings.gradle.kts)
                 active_version=$(grep -oP 'stonecutter\s+active\s+"\K[^"]+' stonecutter.gradle.kts)
-                
+
                 echo "Detected vcsVersion: ${'$'}vcs_version"
                 echo "Detected active version: ${'$'}active_version"
-                
+
                 if [ "${'$'}vcs_version" != "${'$'}active_version" ]; then
                   echo "Please run './gradlew \"Reset active project\"' to set the stonecutter branch to the version control version."
                   exit 1
